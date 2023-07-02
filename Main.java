@@ -21,7 +21,7 @@ public class Main {
         /*
         Я придумал сделать вот такую конструкцию, чтобы мы не расходовали лишнюю память на массив
         избыточной длины, и чтобы в конце массив не был заполнен нулями.
-        Сначала считаем, сколько у нас кратных чисел от i до shortMaxValue:
+        Сначала считаем, сколько у нас кратных чисел от i до Short.MaxValue:
         */
         int j = i;
         int counter = 0;
@@ -50,27 +50,29 @@ public class Main {
         System.out.println(Arrays.deepToString(m1));
         //4. Найти все некратные n числа в диапазоне от Short.MIN_VALUE до i и сохранить в массив m2
         /*
-        Здесь сделал аналогично третьему.
+        Здесь сделал по образу и подобию третьего.
+        Только здесь пробежались по всем значениям от Short.MIN_VALUE до i, посчитали, сколько некратных
+        чисел, а дальше создали массив m2 нужного размера и заполнили его.
          */
         j = Short.MIN_VALUE;
         counter = 0;
         while(j <= i){
-            if ((j % n != 0) && (j <= i)) {
+            if ((j % n == 0) && (j <= i)) {
                 j++;
-            } else if ((j % n == 0) && (j <= i)){
+            } else if ((j % n != 0) && (j <= i)){
                 counter++;
-                j+=n;
+                j++;
             }
         }
         Integer[] m2 = new Integer[counter];
         j = Short.MIN_VALUE;
         for (int k = 0; k < m2.length; k++){
             while (j <= i){
-                if ((j % n != 0) && (j <= i)) {
+                if ((j % n == 0) && (j <= i)) {
                     j++;
-                } else if ((j % n == 0) && (j <= i)){
+                } else if ((j % n != 0) && (j <= i)){
                     m2[k] = j;
-                    j+=n;
+                    j++;
                     break;
                 }
             }
